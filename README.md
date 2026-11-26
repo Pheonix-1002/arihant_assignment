@@ -1,73 +1,308 @@
 # AI Trading Suite
 
-Deterministic core + Streamlit UI for three AI product prototypes:
+**An AI-powered financial analysis platform featuring three interactive trading and investment prototypes, built with Python, Streamlit, and Google Gemini.**
 
-- Project 1 - AI Options Trading Assistant
-- Project 2 - AI Investment Assistant
-- Project 3 - AI Chart Intelligence
+[🚀 **Open Live Demo**](https://arihantassignment-c5gpfvxviufqpxscgbfsbe.streamlit.app/) · [GitHub Repository](https://github.com/Pheonix-1002/arihant_assignment)
 
-Numbers are computed by deterministic code (Black-Scholes, XIRR,
-indicator math). The narrative layer calls Gemini via the REST
-endpoint when a key is present, and falls back to template-based
-explanations otherwise. No key required to run - all engines work
-fully offline.
+> Replace the demo URL above with your actual Streamlit Community Cloud URL.
 
-## Quick start (no key needed)
+---
 
-    pip install -r requirements.txt
-    python -m streamlit run app.py
+## Overview
 
-Opens http://localhost:8501 with all three projects. AI Lens lines
-show `[source: template]` - this is the intended behavior.
+AI Trading Suite is a collection of three financial analysis applications that combine deterministic financial computation with AI-generated explanations.
 
-## Enable live Gemini narratives (optional)
+The platform follows a **deterministic core + AI narrative** architecture:
 
-1. Get a free key at https://aistudio.google.com/apikey
+- Financial calculations are performed using Python-based analytical engines.
+- AI generates contextual explanations and insights using the Gemini API.
+- A template-based fallback ensures the applications remain usable without an API key.
+- Streamlit provides an interactive interface for exploring results and recommendations.
 
-2. Copy the example secrets file:
+The platform contains three independent prototypes:
 
-       .streamlit/secrets.toml.example  ->  .streamlit/secrets.toml
+1. **AI Options Trading Assistant** – Option-chain analysis, strategy discovery and risk evaluation.
+2. **AI Investment Assistant** – Portfolio analysis, performance measurement and investment insights.
+3. **AI Chart Intelligence** – Technical indicators, chart patterns, trend analysis and confluence detection.
 
-3. Paste your key into the new file:
+## Applications
 
-       GEMINI_API_KEY = "AIza..."
+### 1. AI Options Trading Assistant
 
-4. Restart the app. AI Lens lines now show `[source: gemini]`.
+Analyzes option-chain data and identifies strategies based on market conditions and user-defined risk preferences.
 
-For CLI demos (`python demo.py`), set the key as an environment
-variable instead:
+**Key features:**
+- Option-chain analysis using Open Interest (OI) and Change in OI.
+- Put-Call Ratio (PCR) and implied volatility analysis.
+- Support and resistance estimation using OI distribution.
+- Maximum Pain calculation.
+- Market regime and directional bias detection.
+- Automated options strategy discovery.
+- Strategy Fit Score based on user preferences.
+- Payoff visualization and risk analysis.
+- Monte Carlo-based probability-of-profit estimation.
 
-    # PowerShell
-    $env:GEMINI_API_KEY="AIza..."
+### 2. AI Investment Assistant
 
-    # bash
-    export GEMINI_API_KEY="AIza..."
+Analyzes portfolio holdings and evaluates investment performance and allocation.
 
-## Deploy to Streamlit Community Cloud
+**Key features:**
+- Portfolio allocation analysis.
+- Investment performance evaluation.
+- XIRR-based return calculations.
+- Portfolio health scoring.
+- Asset allocation insights.
+- Risk and concentration analysis.
+- AI-generated portfolio observations and explanations.
 
-1. Push the repo to GitHub (`.streamlit/secrets.toml` is gitignored,
-   so your key never reaches GitHub)
-2. Go to https://share.streamlit.io, connect the repo, main file = `app.py`
-3. In "Advanced settings" -> "Secrets", paste:
+### 3. AI Chart Intelligence
 
-       GEMINI_API_KEY = "AIza..."
+Evaluates historical market data using technical analysis and combines multiple indicators to identify potential trading signals.
 
-4. Deploy. Public URL is generated automatically.
+**Key features:**
+- Historical market data retrieval using Yahoo Finance.
+- Technical indicator calculations.
+- Trend identification.
+- Chart pattern detection.
+- Multi-indicator confluence analysis.
+- Signal strength evaluation.
+- Interactive chart visualizations.
+- AI-generated market explanations.
 
-## Model
-
-Default: `gemini-3.1-flash-lite`. Override via `GEMINI_MODEL`
-environment variable, or edit `MODEL_ID` in `shared/narrative.py`.
-
-If your API key does not have access to the default model, the
-narrative line falls back to template mode and the response shows
-`[source: template_fallback (HTTPError)]` - set a different model
-via GEMINI_MODEL to fix.
+---
 
 ## Architecture
 
-    shared/                  Black-Scholes, Greeks, REST narrative engine
-    project1_options/        Chain analyzer, strategies, Fit Score, risk
-    project2_portfolio/      XIRR, allocation, health score, insights
-    project3_charts/         Indicators, patterns, trend, confluence
-    ui/                      Streamlit app
+The platform separates financial computation from AI-generated explanations.
+
+```text
+                 AI TRADING SUITE
+                        |
+             Streamlit User Interface
+                        |
+          +-------------+-------------+
+          |             |             |
+       Project 1     Project 2     Project 3
+       Options       Portfolio       Charts
+       Assistant    Assistant     Intelligence
+          |             |             |
+          v             v             v
+      Option Chain   XIRR &         Indicators
+      Analysis       Allocation     & Patterns
+      Strategy       Health Score   Trend Analysis
+      Finder         Insights       Confluence
+      Risk Engine
+          |             |             |
+          +-------------+-------------+
+                        |
+                 Shared Components
+                        |
+             +----------+----------+
+             |                     |
+        Financial Math       Narrative Engine
+        Black-Scholes        Google Gemini API
+        Greeks               Template Fallback
+                        |
+                 Streamlit Dashboard
+```
+
+### Design principles
+
+- **Deterministic calculations:** Financial metrics are computed by dedicated Python functions rather than generated by an LLM.
+- **AI-assisted explanations:** Gemini is used to communicate analytical results in a more understandable format.
+- **Graceful fallback:** Template-based narratives are available when Gemini is not configured or an API request fails.
+- **Modular architecture:** Each project has its own analytical engine and UI module, while common functionality is shared.
+
+## Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Programming language | Python |
+| Frontend | Streamlit |
+| Data processing | NumPy, Pandas |
+| Financial mathematics | SciPy, Black-Scholes |
+| Visualization | Plotly |
+| Market data | yfinance |
+| Generative AI | Google Gemini API |
+| AI integration | REST API |
+| Deployment | Streamlit Community Cloud |
+| Version control | Git, GitHub |
+
+## Project Structure
+
+```text
+arihant_assignment/
+│
+├── app.py
+│
+├── shared/
+│   ├── black_scholes.py
+│   └── narrative.py
+│
+├── project1_options/
+│   ├── data.py
+│   ├── chain_analyzer.py
+│   ├── strategies.py
+│   ├── finder.py
+│   ├── fit_score.py
+│   └── risk.py
+│
+├── project2_portfolio/
+│
+├── project3_charts/
+│
+├── ui/
+│   ├── home.py
+│   ├── project1.py
+│   ├── project2.py
+│   └── project3.py
+│
+├── .streamlit/
+│   ├── config.toml
+│   └── secrets.toml.example
+│
+├── requirements.txt
+├── demo.py
+└── README.md
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10 or later
+- pip
+- Git (optional)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Pheonix-1002/arihant_assignment.git
+cd arihant_assignment
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the application
+
+```bash
+python -m streamlit run app.py
+```
+
+Open the application at:
+
+```text
+http://localhost:8501
+```
+
+**No Gemini API key is required to run the application.** All analytical engines work independently, and the narrative layer uses template-based explanations when Gemini is unavailable.
+
+## Enable Google Gemini
+
+Gemini integration is optional and provides AI-generated explanations through the narrative engine.
+
+### 1. Get an API key
+
+Generate a key using [Google AI Studio](https://aistudio.google.com/apikey).
+
+### 2. Configure Streamlit secrets
+
+Create a file at:
+
+```text
+.streamlit/secrets.toml
+```
+
+Add:
+
+```toml
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+```
+
+### 3. Restart the application
+
+When a valid key and supported model are configured, the AI Lens can use Gemini for generating contextual explanations.
+
+Without a key, the application automatically falls back to template-based narratives.
+
+### CLI configuration
+
+For command-line demonstrations, configure the environment variable.
+
+**PowerShell:**
+
+```powershell
+$env:GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+```
+
+**Linux / macOS:**
+
+```bash
+export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+```
+
+## Model Configuration
+
+The default Gemini model is:
+
+```text
+gemini-3.1-flash-lite
+```
+
+The model can be overridden using the `GEMINI_MODEL` environment variable or by editing `MODEL_ID` in:
+
+```text
+shared/narrative.py
+```
+
+If the configured model is unavailable to the API key, the narrative engine falls back to template-based explanations.
+
+## Deployment
+
+The application is deployed using **Streamlit Community Cloud**.
+
+To deploy your own instance:
+
+1. Push the repository to GitHub.
+2. Visit [Streamlit Community Cloud](https://share.streamlit.io).
+3. Connect your GitHub repository.
+4. Select the `main` branch.
+5. Set the main application file to `app.py`.
+6. Add your `GEMINI_API_KEY` under Advanced Settings → Secrets if Gemini integration is required.
+7. Deploy the application.
+
+The hosted application receives a public Streamlit URL.
+
+**Security:** Never commit `.streamlit/secrets.toml` or expose API keys in source code. Use Streamlit's secrets configuration for deployed applications.
+
+## Important Notes
+
+- The Options Assistant currently uses synthetic option-chain data for demonstration.
+- The Portfolio Assistant uses illustrative portfolio data.
+- The Chart Intelligence module retrieves historical market data through Yahoo Finance and may use synthetic fallback data.
+- AI-generated explanations are informational and should not be treated as financial advice.
+- Model-estimated probabilities and strategy scores are not guarantees of future performance.
+
+## Future Scope
+
+Potential extensions include:
+
+- Integration with broker and exchange market-data APIs.
+- Real-time option-chain ingestion.
+- User-uploaded portfolio statements.
+- Advanced portfolio optimization.
+- More sophisticated volatility and risk models.
+- Backtesting and historical strategy evaluation.
+- Additional AI-assisted research capabilities.
+
+## Disclaimer
+
+This project is developed for educational, research and demonstration purposes. It is not a registered investment advisory service. Financial calculations, strategy recommendations and AI-generated explanations should not be considered personalized investment advice.
+
+---
+
+**Built with Python, Streamlit and Google Gemini.**
