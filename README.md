@@ -4,8 +4,6 @@
 
 [🚀 **Open Live Demo**](https://arihantassignment-c5gpfvxviufqpxscgbfsbe.streamlit.app/) · [GitHub Repository](https://github.com/Pheonix-1002/arihant_assignment)
 
-> Replace the demo URL above with your actual Streamlit Community Cloud URL.
-
 ---
 
 ## Overview
