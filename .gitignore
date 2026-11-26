@@ -1,0 +1,25 @@
+# Secrets - NEVER commit
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
